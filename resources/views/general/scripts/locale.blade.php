@@ -1,0 +1,1 @@
+Window.app.locale = '{{ $content }}';

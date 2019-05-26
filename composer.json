@@ -1,0 +1,49 @@
+{
+  "name": "kuzyt/halfdream",
+  "description": "Basic Laravel sites generator.",
+  "keywords": ["laravel"],
+  "license": "MIT",
+  "homepage": "https://www.halfdream.ru/",
+  "support": {
+    "issues": "https://github.com/kuzyt/halfdream/issues",
+    "source": "https://github.com/kuzyt/halfdream"
+  },
+  "authors": [
+    {
+      "name": "KuzyT",
+      "email": "admin@kuzyt.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "KuzyT\\Halfdream\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "KuzyT\\Halfdream\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "illuminate/support": "~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+    "intervention/image": "^2.4",
+    "spatie/laravel-permission": "^2.32.0",
+    "spatie/laravel-translatable": "^3.1.2",
+    "jbroadway/urlify": "^1.1",
+    "codezero/laravel-unique-translation": "^1.1",
+    "sokil/php-isocodes": "^2.2"
+  },
+  "require-dev": {
+
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "KuzyT\\Halfdream\\HalfdreamServiceProvider"
+      ]
+    },
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
