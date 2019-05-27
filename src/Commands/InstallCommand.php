@@ -153,6 +153,21 @@ class InstallCommand extends Command
                 resource_path('views/auth/passwords/reset.blade.php'),
                 $filesystem->get(__DIR__ . '/../../publishable/resources/views/auth/passwords/reset.blade.php')
             );
+
+            $this->info('Force for js and sass files');
+
+            $filesystem->put(
+                resource_path('js/app.js'),
+                $filesystem->get(__DIR__ . '/../../publishable/resources/js/app.js')
+            );
+            $filesystem->put(
+                resource_path('js/bootstrap.js'),
+                $filesystem->get(__DIR__ . '/../../publishable/resources/js/bootstrap.js')
+            );
+            $filesystem->put(
+                resource_path('sass/app.scss'),
+                $filesystem->get(__DIR__ . '/../../publishable/resources/sass/app.scss')
+            );
         }
 
         $composer = $this->findComposer();
