@@ -49,7 +49,7 @@ trait HasUnique
         if ($this->isUnique()) {
             if (method_exists($this, 'isTranslatable') && $this->isTranslatable()) {
                 // Translatable unique only for MySQL >= 5.7. If not, unique won't works properly
-                if (config('halfdream.db_json')) {
+                if (!config('halfdream.db_json')) {
                     return;
                 }
                 $rule = UniqueTranslationRule::for($this->uniqueTable, $this->getField());
