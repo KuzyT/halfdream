@@ -67,9 +67,7 @@ class InstallCommand extends Command
         $force = $this->option('force');
 
         if (!file_exists(config_path('halfdream.php'))) {
-            $this->info('Making default Laravel auth');
-            $this->call('make:auth');
-
+            $this->info('Please, install Laravel auth');
             $force = true;
         }
 
@@ -172,7 +170,7 @@ class InstallCommand extends Command
 
         $composer = $this->findComposer();
 
-        $process = new Process($composer.' dump-autoload');
+        $process = new Process([$composer, 'dump-autoload']);
         $process->setTimeout(null); // Setting timeout to null to prevent installation from stopping at a certain point in time
         $process->setWorkingDirectory(base_path())->run();
 

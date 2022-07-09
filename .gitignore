@@ -1,1 +1,5 @@
 /.idea
+/publishable/package-lock.json
+/publishable/node_modules
+/publishable/mix-manifest.json
+/publishable/images/vendor
