@@ -292,13 +292,6 @@ abstract class HalfdreamModule
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validateForm(Request $request, Form $form) {
-//        header('Content-Type: application/json; charset=utf-8');
-//        die(json_encode(['all' => $request->all(), 'validated' => \Halfdream::comprisableValidatorRules($form), 'attributes' => \Halfdream::comprisableValidatorAttributeNames($form), 'messages' => \Halfdream::comprisableValidatorMessages($form), 'validate' => \Validator::validate(
-//            $request->all(),
-//            \Halfdream::comprisableValidatorRules($form),
-//            \Halfdream::comprisableValidatorMessages($form),
-//            \Halfdream::comprisableValidatorAttributeNames($form)
-//        )]));
         return \Validator::validate(
             $request->all(),
             \Halfdream::comprisableValidatorRules($form),
