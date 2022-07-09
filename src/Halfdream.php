@@ -119,34 +119,39 @@ class Halfdream
     /**
      * Seo-link
      */
-    public function makeSeoTitle($name, $length = 60, $locale = null)
+    public function makeSeoTitle($name, $length = 60, $locale = null, $separator = '-')
     {
-        return $this->makeSeo($name, $length, false);
+        return $this->makeSeo($name, $length, false, $locale, $separator);
     }
 
     /**
      * Seo-file
      */
-    public function makeSeoFile($name, $length = 60, $locale = null)
+    public function makeSeoFile($name, $length = 60, $locale = null, $separator = '-')
     {
-        return $this->makeSeo($name, $length, true, $locale);
+        return $this->makeSeo($name, $length, true, $locale, $separator);
     }
 
     /**
      * Seo (base function)
      */
-    private function makeSeo($name, $length, $is_file, $locale = null)
+    private function makeSeo($name, $length, $is_file, $locale = null, $separator = '-')
     {
         if (!$locale) {
             $locale = $this->locale();
         }
-        /**
-         * It uses 'A PHP port of URLify.js from the Django project'
-         * If someone know, should I add an extra license about it,
-         * more than dependency in composer - please, tell me that,
-         * cause i'm not good in such license questions.
-         */
-        return \URLify::filter($name, $length, $locale, $is_file);
+
+        if ($is_file && Str::contains($name, '.')) {
+            $arStr = explode('.', $name);
+            for ($i = 0; $i < count($arStr); $i++) {
+                $arStr[$i] = Str::slug($arStr[$i], $separator, $locale);
+            }
+            $name = implode('.', $arStr);
+        } else {
+            $name = Str::slug($name, $separator, $locale);
+        }
+
+        return Str::limit($name, $length, '');
     }
 
     /**
@@ -451,6 +456,14 @@ class Halfdream
                 $rules = array_merge($rules, $element->getTranslatableRules());
             }
         }
+        // Set default nullable rule, if array of rules is empty (nothing returns in Validator::validate() for
+        // empty rules in new Laravel versions
+        foreach ($rules as $field => $arRules) {
+            if ($arRules === []) {
+                $rules[$field][] = 'nullable';
+            }
+        }
+
         return $rules;
     }
 

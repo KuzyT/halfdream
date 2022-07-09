@@ -85,20 +85,20 @@ class InstallCommand extends Command
         $this->info('Migrating the database tables into your application');
         $this->call('migrate');
 
-        $this->info('Adding role and other magic to App\User');
+        $this->info('Adding role and other magic to App\Models\User');
 
         if ($force) {
-            if (file_exists(app_path('User.php'))) {
-                $str = file_get_contents(app_path('User.php'));
+            if (file_exists(app_path('Models\User.php'))) {
+                $str = file_get_contents(app_path('Models\User.php'));
 
                 if ($str !== false) {
-                    $str = str_replace('use Notifiable;', 'use Notifiable, \Spatie\Permission\Traits\HasRoles, \KuzyT\Halfdream\General\Traits\Front\HasAvatar;', $str);
+                    $str = str_replace('use HasApiTokens, HasFactory, Notifiable;', 'use HasApiTokens, HasFactory, Notifiable, \Spatie\Permission\Traits\HasRoles, \KuzyT\Halfdream\General\Traits\Front\HasAvatar;', $str);
 
-                    file_put_contents(app_path('User.php'), $str);
+                    file_put_contents(app_path('Models\User.php'), $str);
                 }
             } else {
-                $this->warn('Unable to locate "app/User.php". Did you move this file?');
-                $this->warn('You will need to update this manually.  Change "use Notifiable;" to "use Notifiable, \Spatie\Permission\Traits\HasRoles, \KuzyT\Halfdream\General\Traits\Front\HasAvatar;" in your User model');
+                $this->warn('Unable to locate "app/Models/User.php". Did you move this file?');
+                $this->warn('You will need to update this manually.  Change "use HasApiTokens, HasFactory, Notifiable;" to "use HasApiTokens, HasFactory, Notifiable, \Spatie\Permission\Traits\HasRoles, \KuzyT\Halfdream\General\Traits\Front\HasAvatar;" in your User model');
             }
 
             $this->info('HalfDream routes to routes/web.php');

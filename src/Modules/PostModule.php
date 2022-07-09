@@ -7,7 +7,7 @@
 
 namespace KuzyT\Halfdream\Modules;
 
-use App\User;
+use App\Models\User;
 use KuzyT\Halfdream\Admin\Display\Display;
 use KuzyT\Halfdream\Admin\Form\Form;
 use KuzyT\Halfdream\Admin\HalfdreamDisplay;
@@ -75,7 +75,7 @@ class PostModule extends HalfdreamModule
                         HalfdreamFormElement::select('status', __('halfdream::post.model.status'))->setCollection(with(new $this->modelClass)->getStatusesValues())->setDefaultValue(with(new $this->modelClass)->getDefaultStatus())->required(),
                         HalfdreamFormElement::datetime('published_at', __('halfdream::post.model.published_at'))->setDefaultValue(\Carbon\Carbon::now()),
                     ], 7),
-                HalfdreamFormElement::ckeditor('content', __('halfdream::post.model.content')),
+                HalfdreamFormElement::ckeditor('content', __('halfdream::post.model.content'))->required(),
                 HalfdreamFormElement::uploadimages('gallery', __('halfdream::post.model.gallery'), with(new $this->modelClass)->getSeoUrlField(), 'title'),
                 HalfdreamFormElement::seo(with(new $this->modelClass)->getTable())
             ]),

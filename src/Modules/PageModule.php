@@ -7,7 +7,7 @@
 
 namespace KuzyT\Halfdream\Modules;
 
-use App\User;
+use App\Models\User;
 use KuzyT\Halfdream\Admin\Display\Display;
 use KuzyT\Halfdream\Admin\Form\Form;
 use KuzyT\Halfdream\Admin\HalfdreamDisplay;

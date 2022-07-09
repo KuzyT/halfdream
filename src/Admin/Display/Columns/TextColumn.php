@@ -7,6 +7,7 @@
 
 namespace KuzyT\Halfdream\Admin\Display\Columns;
 
+use Illuminate\Support\Str;
 use KuzyT\Halfdream\General\Traits\HasMaxSize;
 
 class TextColumn extends Column
@@ -31,6 +32,6 @@ class TextColumn extends Column
         // Strip tags - for html content
         $value = strip_tags(parent::getDisplayedValue());
         // Text limit is used here because it must be limited after strip tags
-        return $this->getMaxSize() ? str_limit($value, $this->getMaxSize()) : $value;
+        return $this->getMaxSize() ? Str::limit($value, $this->getMaxSize()) : $value;
     }
 }

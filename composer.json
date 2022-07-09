@@ -25,13 +25,13 @@
     }
   },
   "require": {
-    "illuminate/support": "~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+    "laravel/framework": "^9.0",
     "intervention/image": "^2.4",
-    "spatie/laravel-permission": "^2.32.0",
-    "spatie/laravel-translatable": "^3.1.2",
-    "jbroadway/urlify": "^1.1",
-    "codezero/laravel-unique-translation": "^1.1",
-    "sokil/php-isocodes": "^2.2"
+    "spatie/laravel-permission": "^5.5.0",
+    "spatie/laravel-translatable": "^6.0.0",
+    "codezero/laravel-unique-translation": "^3.5",
+    "sokil/php-isocodes": "^4.1",
+    "sokil/php-isocodes-db-i18n": "^4.0"
   },
   "require-dev": {
 

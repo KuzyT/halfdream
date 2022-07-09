@@ -6,6 +6,7 @@
  */
 
 use Illuminate\Http\Request;
+use \KuzyT\Halfdream\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['web', 'locale'], 'namespace' => '\KuzyT\Halfdream\Http\Controllers'], function() {
+Route::group(['middleware' => ['web', 'locale']], function() {
 
     /**
      * Switch language.
@@ -34,10 +35,9 @@ Route::group(['middleware' => ['web', 'locale'], 'namespace' => '\KuzyT\Halfdrea
     Route::group([
         'middleware' => ['auth', 'role:' . implode('|', config('halfdream.admin.roles.access'))],
         'prefix' => config('halfdream.admin.route'),
-        'as' => 'admin.',
-        'namespace' => 'Admin'
+        'as' => 'admin.'
     ], function() {
-        Route::get('/', 'AdminController@index')->name('index');
+        Route::get('/', [Admin\AdminController::class, 'index'])->name('index');
 
         Route::group([
             'prefix' => '{module}',
@@ -48,20 +48,20 @@ Route::group(['middleware' => ['web', 'locale'], 'namespace' => '\KuzyT\Halfdrea
              * so here are custom equivalent controllers. With no 'show', but 'edit' instead.
              * And without 'patch' for 'update'.
              */
-            Route::get('/', 'ModuleController@index')->name('index');
-            Route::get('/create', 'ModuleController@create')->name('create');
-            Route::post('/', 'ModuleController@store')->name('store');
-            Route::get('/{id}', 'ModuleController@edit')->name('edit');
-            Route::put('/{id}', 'ModuleController@update')->name('update');
-            Route::delete('/{id}', 'ModuleController@destroy')->name('destroy');
+            Route::get('/', [Admin\ModuleController::class, 'index'])->name('index');
+            Route::get('/create', [Admin\ModuleController::class, 'create'])->name('create');
+            Route::post('/', [Admin\ModuleController::class, 'store'])->name('store');
+            Route::get('/{id}', [Admin\ModuleController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [Admin\ModuleController::class, 'update'])->name('update');
+            Route::delete('/{id}', [Admin\ModuleController::class, 'destroy'])->name('destroy');
         });
 
         /**
          * Uploading from admin panel.
          */
         Route::group(['prefix' => 'upload', 'as' => 'upload.',], function() {
-            Route::post('/image', 'UploadController@image')->name('image');
-            Route::post('/ckeditor', 'UploadController@ckeditor')->name('ckeditor');
+            Route::post('/image', [Admin\UploadController::class, 'image'])->name('image');
+            Route::post('/ckeditor', [Admin\UploadController::class, 'ckeditor'])->name('ckeditor');
         });
 
     });

@@ -6,6 +6,7 @@
  */
 
 namespace KuzyT\Halfdream\Admin\Display\Columns;
+use Illuminate\Support\Str;
 use KuzyT\Halfdream\General\Traits\HasMaxSize;
 use KuzyT\Halfdream\Facades\Halfdream;
 
@@ -30,6 +31,6 @@ class HtmlColumn extends Column
     public function getDisplayedValue() {
         $value = parent::getDisplayedValue();
         // Close tags after text limit
-        return $this->getMaxSize() ? Halfdream::closeTags(str_limit($value, $this->getMaxSize())) : $value;
+        return $this->getMaxSize() ? Halfdream::closeTags(Str::limit($value, $this->getMaxSize())) : $value;
     }
 }
