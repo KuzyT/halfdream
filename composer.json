@@ -25,7 +25,7 @@
     }
   },
   "require": {
-    "laravel/framework": "^9.0",
+    "laravel/framework": "^9.0|^10.0",
     "intervention/image": "^2.4",
     "spatie/laravel-permission": "^5.5.0",
     "spatie/laravel-translatable": "^6.0.0",
